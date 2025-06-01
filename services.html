@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuzycznyPortal - Serwisy Streamingowe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-music text-primary me-2"></i>MuzycznyPortal
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home me-1"></i>Panel Główny
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.html">
+                            <i class="fas fa-microphone me-1"></i>Artyści
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="albums.html">
+                            <i class="fas fa-compact-disc me-1"></i>Albumy
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="services.html">
+                            <i class="fas fa-stream me-1"></i>Serwisy
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <span class="me-3">
+                        <i class="fas fa-user me-1"></i>
+                        Witaj, <span id="username">admin</span>!
+                    </span>
+                    <button class="btn btn-outline-primary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-1"></i>Wyloguj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="text-primary">
+                    <i class="fas fa-stream me-2"></i>Serwisy Streamingowe
+                </h1>
+                <p class="text-muted">Poznaj najpopularniejsze platformy do słuchania muzyki online</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="search-container">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search text-primary"></i>
+                        </span>
+                        <input type="text" class="form-control" 
+                               id="searchInput" placeholder="Szukaj serwisu...">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="typeFilter">
+                    <option value="">Wszystkie typy</option>
+                    <option value="Streaming">Streaming</option>
+                    <option value="Radio">Radio</option>
+                    <option value="Podcast">Podcast</option>
+                    <option value="Social">Social</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="sortBy">
+                    <option value="name">Sortuj po nazwie</option>
+                    <option value="users">Sortuj po użytkownikach</option>
+                    <option value="price">Sortuj po cenie</option>
+                    <option value="rating">Sortuj po ocenie</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" id="servicesGrid">
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-primary mb-4">
+                    <i class="fas fa-chart-bar me-2"></i>Porównanie Popularnych Serwisów
+                </h3>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Serwis</th>
+                                        <th>Użytkownicy</th>
+                                        <th>Cena/miesiąc</th>
+                                        <th>Jakość audio</th>
+                                        <th>Offline</th>
+                                        <th>Ocena</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="comparisonTable">
+                                    <!-- Comparison data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-primary">MuzycznyPortal</h6>
+                    <p class="text-muted small">
+                        Kompleksowa baza danych muzycznych dla miłośników muzyki.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted small mb-0">
+                        © 2025 MuzycznyPortal. Wszystkie prawa zastrzeżone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="services-data.js"></script>
+    <script>
+        checkAuth();
+        
+        document.getElementById('username').textContent = localStorage.getItem('username') || 'admin';
+    </script>
+</body>
+</html> 
